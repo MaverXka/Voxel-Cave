@@ -8,22 +8,9 @@ Chunk::Chunk()
 	ChunkBlocks = new BlockID[TotalChunkBlocksSize];
 	bIsChunkBlocksAllocated = true;
 
+
+	GenerateChunk();
 	GenerateMesh();
-
-
-	auto Device = RenderProgram::Get()->M_Device;
-	CD3DX12_HEAP_PROPERTIES heapProps(D3D12_HEAP_TYPE_UPLOAD);
-	auto desc = CD3DX12_RESOURCE_DESC::Buffer(sizeof(ChunkVertex)*ARRAYSIZE(triangleVertices));
-	Device->CreateCommittedResource(&heapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&M_ChunkVertexBuffer));
-
-	void* data;
-	M_ChunkVertexBuffer->Map(0, nullptr, &data);
-	memcpy(data, triangleVertices, sizeof(ChunkVertex) * ARRAYSIZE(triangleVertices));
-	M_ChunkVertexBuffer->Unmap(0, nullptr);
-
-	ChunkVertexBufferView.BufferLocation = M_ChunkVertexBuffer->GetGPUVirtualAddress();
-	ChunkVertexBufferView.StrideInBytes = sizeof(ChunkVertex);
-	ChunkVertexBufferView.SizeInBytes = sizeof(ChunkVertex) * ARRAYSIZE(triangleVertices);
 
 }
 
@@ -34,8 +21,38 @@ Chunk::~Chunk()
 	M_ChunkConstantBuffer.Reset();
 }
 
+void Chunk::GenerateChunk()
+{
+	for (ChunkLocalVoxelIterator it; it; ++it)
+	{
+		ChunkBlocks[it.GetIndex()] = it.GetZ() > 50 ? 0 : 1;
+	}
+}
+
 void Chunk::GenerateMesh()
 {
+
+	for (ChunkLocalVoxelIterator it; it; ++it)
+	{
+		if (ChunkBlocks[it.GetIndex()] == 1)
+		{
+			ChunkVertices.insert(ChunkVertices.end(), std::begin(triangleVertices), std::end(triangleVertices));
+		}
+	}
+
+	auto Device = RenderProgram::Get()->M_Device;
+	CD3DX12_HEAP_PROPERTIES heapProps(D3D12_HEAP_TYPE_UPLOAD);
+	auto desc = CD3DX12_RESOURCE_DESC::Buffer(sizeof(ChunkVertex) * ChunkVertices.size());
+	Device->CreateCommittedResource(&heapProps, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&M_ChunkVertexBuffer));
+
+	void* data;
+	M_ChunkVertexBuffer->Map(0, nullptr, &data);
+	memcpy(data, ChunkVertices.data(), sizeof(ChunkVertex) * ChunkVertices.size());
+	M_ChunkVertexBuffer->Unmap(0, nullptr);
+
+	ChunkVertexBufferView.BufferLocation = M_ChunkVertexBuffer->GetGPUVirtualAddress();
+	ChunkVertexBufferView.StrideInBytes = sizeof(ChunkVertex);
+	ChunkVertexBufferView.SizeInBytes = sizeof(ChunkVertex) * ChunkVertices.size();
 }
 
 // Render thread

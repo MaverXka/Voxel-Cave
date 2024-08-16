@@ -14,6 +14,8 @@ public:
 	/// <returns>Returns true if chunk blocks array are allocated in memory</returns>
 	bool GetIsChunkBlocksAllocated() { return bIsChunkBlocksAllocated; };
 
+    void GenerateChunk();
+
 	void GenerateMesh();
 
 	void RenderThread_BuildCMDList();
@@ -77,6 +79,8 @@ protected:
     {1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.5f, 0.5f, 0.5f},
     {-1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.5f, 0.5f, 0.5f}
 	};
+
+    std::vector<ChunkVertex> ChunkVertices;
 
 	ComPtr<ID3D12Resource> M_ChunkVertexBuffer;
 	ComPtr<ID3D12Resource> M_ChunkIndexBuffer;

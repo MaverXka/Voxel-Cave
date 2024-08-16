@@ -6,6 +6,7 @@
 #include <wrl/client.h>
 #include "Logging/Logger.h"
 #include "Engine.h"
+#include "World/Voxel/Block.h"
 #include "Core/Core.h"
 
 using namespace Microsoft::WRL;

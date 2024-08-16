@@ -69,7 +69,7 @@ void RenderPass_Chunks::RenderThread_Prepare()
 
 			RenderPassCommandList->SetGraphicsRootConstantBufferView(0, ChunkRenderer->M_ChunkConstantBuffer->GetGPUVirtualAddress());
 			RenderPassCommandList->IASetVertexBuffers(0, 1, &CWorld->WorldChunks[i]->ChunkVertexBufferView);
-			RenderPassCommandList->DrawInstanced(36, 1, 0, 0);
+			RenderPassCommandList->DrawInstanced(CWorld->WorldChunks[i]->ChunkVertices.size(), 1, 0, 0);
 		}
 	}
 

@@ -114,8 +114,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>cd $(SolutionDir)Scripts\
-call "$(SolutionDir)Scripts\PackAssets.bat"  -Configuration=$(Configuration) -OutputDir="$(OutDir)"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -135,10 +135,12 @@ call "$(SolutionDir)Scripts\PackAssets.bat"  -Configuration=$(Configuration) -Ou
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\World\Voxel\Block.cpp" />
     <ClCompile Include="Engine\Core\Core.cpp" />
     <ClCompile Include="Engine\World\ChunkyWorld\ChunkyWorld.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\Input\InputSystem.cpp" />
+    <ClCompile Include="Game\GameClient.cpp" />
     <ClCompile Include="Misc\Config\Config.cpp" />
     <ClCompile Include="Engine\Renderer\Base\RenderPass.cpp" />
     <ClCompile Include="Engine\Renderer\RenderPasses\RenderPass_IMGUI.cpp" />
@@ -159,14 +161,18 @@ call "$(SolutionDir)Scripts\PackAssets.bat"  -Configuration=$(Configuration) -Ou
     <ClCompile Include="Engine\World\Chunks\Chunk.cpp" />
     <ClCompile Include="Launcher\Main.cpp" />
     <ClCompile Include="Engine\World\Overworld\Overworld.cpp" />
+    <ClCompile Include="Engine\World\Voxel\VoxelShape.cpp" />
+    <ClCompile Include="Game\Registry\Registry.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\World\Voxel\Block.h" />
     <ClInclude Include="Engine\Core\Core.h" />
     <ClInclude Include="Engine\Input\InputKeyBinds.h" />
     <ClInclude Include="Engine\Renderer\RenderProgram.h" />
     <ClInclude Include="Engine\World\ChunkyWorld\ChunkyWorld.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Input\InputSystem.h" />
+    <ClInclude Include="Game\GameClient.h" />
     <ClInclude Include="Misc\Config\Config.h" />
     <ClInclude Include="Misc\Platform\PlatformBinaryReader.h" />
     <ClInclude Include="Engine\Renderer\Base\RenderPass.h" />
@@ -190,6 +196,8 @@ call "$(SolutionDir)Scripts\PackAssets.bat"  -Configuration=$(Configuration) -Ou
     <ClInclude Include="Engine\World\Chunks\ChunkData.h" />
     <ClInclude Include="Engine\PrecompiledHeader\pch.h" />
     <ClInclude Include="Engine\World\Overworld\Overworld.h" />
+    <ClInclude Include="Engine\World\Voxel\VoxelShape.h" />
+    <ClInclude Include="Game\Registry\Registry.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\ChunkPixelShader.hlsl">
