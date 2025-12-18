@@ -16,8 +16,11 @@ class World;
 class Camera;
 class ChunkRenderer;
 
+class Engine;
+
 #ifdef _DEBUG
 class ImGUIManager;
+class GizmoDrawingManager;
 #endif
 
 using namespace Microsoft::WRL;
@@ -58,6 +61,7 @@ public:
 
 #ifdef _DEBUG
 	ImGUIManager* MainImGUIManager;
+	GizmoDrawingManager* MainGizmoDrawManager;
 #endif
 
 	ComPtr<ID3D12Debug> DebugController;
@@ -69,6 +73,9 @@ public:
 	ComPtr<ID3D12DescriptorHeap> M_RTVHeap;
 	ComPtr<ID3D12DescriptorHeap> M_DSVHeap;
 	ComPtr<ID3D12Resource> M_DSVTexture;
+	Engine* EnginePtr;
+
+	std::vector<ID3D12CommandList*> Render_CommandLists;
 
 	int FrameIndex = 0;
 	static const int FrameCount = 2;

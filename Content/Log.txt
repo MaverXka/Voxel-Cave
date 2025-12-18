@@ -1,0 +1,57 @@
+2025-12-18 21:35:09.3589358 [Main Thread] : Window created successfully.
+2025-12-18 21:35:09.3600066 [Main Thread] : Renderer initializing.
+2025-12-18 21:35:09.3907395 [Main Thread] : DXGI Factory created successfully.
+2025-12-18 21:35:09.5805984 [Main Thread] : D3D12 Device created successfully.
+2025-12-18 21:35:09.6223572 [Main Thread] : D3D12 command queue created.
+2025-12-18 21:35:09.6297202 [Main Thread] : DXGI SwapChain created.
+2025-12-18 21:35:09.6308263 [Main Thread] : Main command allocator created.
+2025-12-18 21:35:09.6408148 [Main Thread] : Compiled
+2025-12-18 21:35:09.6411215 [Main Thread] : Shader compiled - DebugVS.hlsl
+2025-12-18 21:35:09.6463348 [Main Thread] : Compiled
+2025-12-18 21:35:09.6465192 [Main Thread] : Shader compiled - DebugPS.hlsl
+2025-12-18 21:35:09.6492524 [Main Thread] : Root signature serialized.
+2025-12-18 21:35:09.6495045 [Main Thread] : Root signature created.
+2025-12-18 21:35:09.8692248 [Main Thread] : Pipeline state object created.
+2025-12-18 21:35:09.8705011 [Main Thread] : World has been started.
+2025-12-18 21:35:09.8713886 [Render Thread] : Render thread init.
+2025-12-18 21:35:09.8716392 [Main Thread] : Creating a new vertex buffer with format: Position4 TexCoord2 Color4
+2025-12-18 21:35:09.8739723 [Main Thread] : D3D12 vertex buffer stride: 36
+2025-12-18 21:35:09.8742002 [Main Thread] : D3D12 vertex buffer uploaded. Size: 102816
+2025-12-18 21:35:09.8745799 [Main Thread] : D3D12 index buffer uploaded. Size: 17136
+2025-12-18 21:35:09.8747436 [Main Thread] : Creating a new vertex buffer with format: Position4 TexCoord2 Color4
+2025-12-18 21:35:09.8760662 [Main Thread] : D3D12 vertex buffer stride: 36
+2025-12-18 21:35:09.8762676 [Main Thread] : D3D12 vertex buffer uploaded. Size: 102816
+2025-12-18 21:35:09.8766366 [Main Thread] : D3D12 index buffer uploaded. Size: 17136
+2025-12-18 21:35:09.8767998 [Main Thread] : Creating a new vertex buffer with format: Position4 TexCoord2 Color4
+2025-12-18 21:35:09.8784296 [Main Thread] : D3D12 vertex buffer stride: 36
+2025-12-18 21:35:09.8786532 [Main Thread] : D3D12 vertex buffer uploaded. Size: 102816
+2025-12-18 21:35:09.8790795 [Main Thread] : D3D12 index buffer uploaded. Size: 17136
+2025-12-18 21:35:09.8794017 [Main Thread] : Creating a new vertex buffer with format: Position4 TexCoord2 Color4
+2025-12-18 21:35:09.8812670 [Main Thread] : D3D12 vertex buffer stride: 36
+2025-12-18 21:35:09.8817642 [Main Thread] : D3D12 vertex buffer uploaded. Size: 102816
+2025-12-18 21:35:09.8825359 [Main Thread] : D3D12 index buffer uploaded. Size: 17136
+2025-12-18 21:35:09.8827922 [Main Thread] : Creating a new vertex buffer with format: Position4 TexCoord2 Color4
+2025-12-18 21:35:09.8854456 [Main Thread] : D3D12 vertex buffer stride: 36
+2025-12-18 21:35:09.8865746 [Main Thread] : D3D12 vertex buffer uploaded. Size: 102816
+2025-12-18 21:35:09.8875082 [Main Thread] : D3D12 index buffer uploaded. Size: 17136
+2025-12-18 21:35:09.9074517 [Main Thread] : Resources upload complete.
+2025-12-18 21:35:09.9095564 [Main Thread] : Compiled
+2025-12-18 21:35:09.9099956 [Main Thread] : Shader compiled - test.hlsl
+2025-12-18 21:35:09.9145458 [Main Thread] : Compiled
+2025-12-18 21:35:09.9148922 [Main Thread] : Shader compiled - testps.hlsl
+2025-12-18 21:35:09.9196636 [Main Thread] : Root signature serialized.
+2025-12-18 21:35:09.9200076 [Main Thread] : Root signature created.
+2025-12-18 21:35:09.9216566 [Main Thread] : Pipeline state object created.
+2025-12-18 21:35:09.9219496 [Main Thread] : Chunk voxel atlas texture loaded.
+2025-12-18 21:35:09.9237794 [Main Thread] : D3D12 constant buffer. Size: 256
+2025-12-18 21:35:09.9243048 [Main Thread] : D3D12 constant buffer. Size: 256
+2025-12-18 21:35:09.9250402 [Main Thread] : D3D12 constant buffer. Size: 256
+2025-12-18 21:35:09.9260402 [Main Thread] : D3D12 constant buffer. Size: 256
+2025-12-18 21:35:09.9268187 [Main Thread] : D3D12 constant buffer. Size: 256
+2025-12-18 21:35:09.9380136 [Main Thread] : Active
+2025-12-18 21:35:09.9694475 [Main Thread] : Window resized: 1904 984
+2025-12-18 21:35:10.3036268 [Main Thread] : Inactive
+2025-12-18 21:35:25.6165008 [Main Thread] : Active
+2025-12-18 21:36:02.5324346 [Main Thread] : Window resized: 2560 1440
+2025-12-18 21:36:12.6551252 [Main Thread] : Window resized: 2544 1401
+2025-12-18 21:36:13.9182907 [Main Thread] : Inactive

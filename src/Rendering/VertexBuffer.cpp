@@ -9,7 +9,7 @@
 const std::map<VertexFormat, const char*> FormatToString =
 {
 	{ VertexFormat::PositionUV, "Position4 TexCoord2" },
-	{ VertexFormat::PositionColor, "Position4 Color4" },
+	{ VertexFormat::PositionColor, "Position3 Color4" },
 	{ VertexFormat::PositionUVColor, "Position4 TexCoord2 Color4" }
 };
 

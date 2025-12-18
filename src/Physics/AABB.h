@@ -44,6 +44,15 @@ struct AABB
             (Min.Z < Other.Max.Z && Max.Z > Other.Min.Z);
     }
 
+    Vector3f GetCenter()
+    {
+        return (Min + Max) * 0.5f;
+    }
+    Vector3f GetExtent()
+    {
+        return (Max - Min) * 0.5f;
+    }
+
 	//bool IntersectPoint(Vector3f Point)
 	//{
 

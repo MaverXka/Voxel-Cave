@@ -65,7 +65,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(MainEngine));
     ShowWindow(hwnd, nCmdShow);
 
-    MainEngine->SetWindowMode(WindowMode::BorderlessWindow);
+    //MainEngine->SetWindowMode(WindowMode::BorderlessWindow);
 
     bool running = true;
     MSG msg = { };

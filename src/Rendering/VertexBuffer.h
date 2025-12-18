@@ -9,8 +9,18 @@
 
 struct PositionColorVertex
 {
+	PositionColorVertex(Vector3f pos, Vector4Int col)
+	{
+		Position[0] = pos.X;
+		Position[1] = pos.Y;
+		Position[2] = pos.Z;
+		Color[0] = col.X;
+		Color[1] = col.Y;
+		Color[2] = col.Z;
+		Color[3] = col.W;
+	}
 	float Position[3];
-	float Color[4];
+	unsigned char Color[4];
 };
 
 struct PositionUVColorVertex
@@ -32,7 +42,7 @@ struct PositionUVColorVertex
 	float Color[4];
 };
 
-enum VertexFormat : int
+enum VertexFormat : unsigned int
 {
 	PositionUV,
 	PositionUVColor,
@@ -44,6 +54,12 @@ const D3D12_INPUT_ELEMENT_DESC PositionUVColorElementDesc[] =
 	{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,0,0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,0 },
 	{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,0,12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,0 },
 	{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT,0,20, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,0 }
+};
+
+const D3D12_INPUT_ELEMENT_DESC PositionColorElementDesc[] =
+{
+	{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,0,0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,0 },
+	{ "COLOR", 0, DXGI_FORMAT_R8G8B8A8_UNORM,0,12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,0 }
 };
 
 using namespace Microsoft::WRL;

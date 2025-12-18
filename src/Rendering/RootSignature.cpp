@@ -16,7 +16,6 @@ RootSignature::RootSignature()
 	ranges[1].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
 	rootParameters[0].InitAsDescriptorTable(1, &ranges[0], D3D12_SHADER_VISIBILITY_VERTEX);
 	rootParameters[1].InitAsDescriptorTable(1, &ranges[1], D3D12_SHADER_VISIBILITY_PIXEL);
-
 	CD3DX12_STATIC_SAMPLER_DESC staticSampler(0);
 	staticSampler.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	staticSampler.Filter = D3D12_FILTER::D3D12_FILTER_MIN_MAG_MIP_POINT;

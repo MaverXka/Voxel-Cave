@@ -33,10 +33,7 @@ ChunkRenderer::ChunkRenderer()
 	ChunkBindingTable = new BindingTableAllocator();
 	ChunkBindingTable->Build(4096);
 
-
-
 	ChunkVoxelAtlasTextureHandle = ChunkVoxelAtlasTexture->CreateShaderResourceView(ChunkBindingTable);
-	//ChunkVoxelAtlasTexture->CreateShaderResourceView(&ChunkBindingTable->Table(), 3);
 
 	World* world = Renderer::instance->GetWorld();
 	if (!world) return;

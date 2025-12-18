@@ -38,6 +38,7 @@ protected:
 
 	float DeltaTime = 0.0f;
 
+	RECT EngineWindowRect;
 	HWND EngineWindowHWND;
 	Config* EngineConfig = nullptr;
 	Camera* EngineCamera = nullptr;

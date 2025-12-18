@@ -1,7 +1,7 @@
 #include "Shader.h"
-#include <d3dcompiler.h>
 #include <string>
 #include <unordered_map>
+#include <d3dcompiler.h>
 #include "Debug/Log/Logger.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
@@ -31,4 +31,14 @@ Shader::Shader(const wchar_t* ShaderPath, const char* EntryName, ShaderType shad
 		Logger::Get()->LogString(std::string("Shader compile error: ") + (const char*)ErrorBlob->GetBufferPointer());
 	}
 	
+}
+
+LPVOID Shader::GetShaderPointer()
+{
+	return ShaderBlob->GetBufferPointer();
+}
+
+SIZE_T Shader::GetShaderBufferSize()
+{
+	return ShaderBlob->GetBufferSize();
 }

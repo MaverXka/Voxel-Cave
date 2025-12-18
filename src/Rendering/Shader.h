@@ -13,7 +13,7 @@ enum ShaderType : int
 
 };
 
-using namespace Microsoft::WRL;
+//struct ID3DBlob;
 
 class Shader
 {
@@ -21,18 +21,12 @@ public:
 
 	Shader(const wchar_t* ShaderPath, const char* EntryName, ShaderType shaderType);
 
-	LPVOID GetShaderPointer()
-	{
-		return ShaderBlob->GetBufferPointer();
-	}
+	LPVOID GetShaderPointer();
 
-	SIZE_T GetShaderBufferSize()
-	{
-		return ShaderBlob->GetBufferSize();
-	}
+	SIZE_T GetShaderBufferSize();
 
 protected:
 
-	ComPtr<ID3DBlob> ShaderBlob;
+	Microsoft::WRL::ComPtr<ID3DBlob> ShaderBlob;
 
 };

@@ -229,3 +229,34 @@ using Vector2Int = Vector2<int>;
 
 using Vector4f = Vector4<float>;
 using Vector4d = Vector4<double>;
+using Vector4Int = Vector4<int>;
+
+struct Color
+{
+	Color() : R(0), G(0), B(0), A(0)
+	{
+	}
+
+	Color(unsigned char NewR, unsigned char NewG, unsigned char NewB, unsigned char NewA) : R(NewR), G(NewG), B(NewB), A(NewA)
+	{
+	}
+
+	Color(unsigned char NewR, unsigned char NewG, unsigned char NewB) : R(NewR), G(NewG), B(NewB), A(255)
+	{
+	}
+
+	unsigned char R = 0;
+	unsigned char G = 0;
+	unsigned char B = 0;
+	unsigned char A = 0;
+
+	Color operator=(Color& Other)
+	{
+		
+	}
+
+	static Color Red() { return { 255,0,0,255 }; };
+	static Color Green() { return { 0,255,0,255 }; };
+	static Color Blue() { return { 0,0,255,255 }; };
+	static Color White() { return { 255,255,255,255 }; };
+};

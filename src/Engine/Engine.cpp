@@ -17,11 +17,13 @@
 #include "Debug/ImGUI/imgui_impl_win32.h"
 #include "Debug/ImGUI/imgui_impl_dx12.h"
 #include "Debug/ImGUI/imgui.h"
+#include "Debug/Gizmo/Gizmo.h"
 
 #endif
 
 Engine::Engine(HWND hwnd,HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) : EngineWindowHWND(hwnd)
 {
+    GetWindowRect(EngineWindowHWND, &EngineWindowRect);
     EngineConfig = new Config();
 
     EngineInputSystem = new InputSystem(hwnd);
@@ -29,6 +31,7 @@ Engine::Engine(HWND hwnd,HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCm
 
     EngineWorld = new World();
     EngineCamera = new Camera();
+    EngineRenderer->EnginePtr = this;
     EngineRenderer->SetCamera(EngineCamera);
     EngineRenderer->SetRenderWorld(EngineWorld);
     EngineInputSystem->SetCursorLock(false);
@@ -70,6 +73,7 @@ void Engine::EngineUpdate()
     AABB chunkAABB;
     chunkAABB.Min = Vector3f(0, 0, 0);
     chunkAABB.Max = Vector3f(16, 3, 16);
+    DrawAABB(chunkAABB, Color::Green(), 1.0f);
 
     if (EngineInputSystem->IsKeyDown('W')) MoveVel += CamDir;
     if (EngineInputSystem->IsKeyDown('S')) MoveVel -= CamDir;
@@ -77,6 +81,8 @@ void Engine::EngineUpdate()
     if (EngineInputSystem->IsKeyDown('A')) MoveVel -= Right;
     if (EngineInputSystem->IsKeyDown('Q')) MoveVel -= CamUp;
     if (EngineInputSystem->IsKeyDown('E')) MoveVel += CamUp;
+    if (EngineInputSystem->IsKeyDown('V')) SetWindowMode(WindowMode::Windowed);
+    if (EngineInputSystem->IsKeyDown('B')) SetWindowMode(WindowMode::BorderlessWindow);
 
     EngineCamera->AddCameraOffset(MoveVel.Normalized() * DeltaTime * camspeed);
 
@@ -116,9 +122,19 @@ void Engine::SetWindowMode(WindowMode NewWindowMode)
     switch (NewWindowMode)
     {
     case Windowed:
-        
+        SetWindowLong(EngineWindowHWND, GWL_STYLE, WS_OVERLAPPEDWINDOW);
+        SetWindowPos(
+            EngineWindowHWND,
+            HWND_NOTOPMOST,
+            EngineWindowRect.left,
+            EngineWindowRect.top,
+            EngineWindowRect.right - EngineWindowRect.left,
+            EngineWindowRect.bottom - EngineWindowRect.top,
+            SWP_FRAMECHANGED | SWP_SHOWWINDOW
+        );
         break;
     case BorderlessWindow:
+        GetWindowRect(EngineWindowHWND, &EngineWindowRect);
         SetWindowLongPtr(EngineWindowHWND, GWL_STYLE, WS_POPUP);
         SetWindowLongPtr(EngineWindowHWND, GWL_EXSTYLE, WS_EX_APPWINDOW);
         RECT rect;

@@ -19,11 +19,13 @@
 #include "World/World.h"
 #include "Rendering/VertexBuffer.h"
 #include "ChunkRenderer.h"
+#include "Engine/Engine.h"
 
 #ifdef _DEBUG
 #include "Debug/ImGUI/ImGUIManager.h"
 #include "Debug/ImGUI/imgui_impl_dx12.h"
 #include "Debug/ImGUI/imgui_impl_win32.h"
+#include "Debug/Gizmo/GizmoDrawingManager.h"
 #endif
 
 #include "GraphicsCommandList.h"
@@ -180,6 +182,7 @@ Renderer::Renderer(HWND hwnd) : Viewport(0.0f,0.0f,1280.0f,720.0f), ScissorRect(
 
 #ifdef _DEBUG
 	MainImGUIManager = new ImGUIManager(hwnd);
+	MainGizmoDrawManager = new GizmoDrawingManager();
 #endif
 
 	RenderThread = Thread::Create([&]() { Render(); }, "Render");
@@ -187,12 +190,19 @@ Renderer::Renderer(HWND hwnd) : Viewport(0.0f,0.0f,1280.0f,720.0f), ScissorRect(
 
 }
 
+#include "Debug/Gizmo/Gizmo.h"
+#include "Physics/AABB.h"
+
 
 void Renderer::Render()
 {
 	Logger::Get()->Log("Render thread init.");
 	while (true)
 	{
+		Render_CommandLists.clear();
+#ifdef _DEBUG
+		MainGizmoDrawManager->RenderThread_NewFrame();
+#endif
 		FrameBeginCommandList->BeginRecord();
 		auto dsvHandle = CD3DX12_CPU_DESCRIPTOR_HANDLE(M_DSVHeap->GetCPUDescriptorHandleForHeapStart());
 		auto b1 = CD3DX12_RESOURCE_BARRIER::Transition(M_RenderTargets[FrameIndex].Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
@@ -220,9 +230,7 @@ void Renderer::Render()
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
 
-
 		ImGui::ShowDemoWindow(&dshow);
-#endif
 
 		{
 			ImGui::Render();
@@ -230,17 +238,16 @@ void Renderer::Render()
 
 		MainImGUIManager->RenderThread_PopulateCommandList(rtvHandle);
 
-		if (MainChunkRenderer)
-		{
-			ID3D12CommandList* ppCommandLists[] = { FrameBeginCommandList->Get(), MainChunkRenderer->ChunkOpaqueRenderCommandList->Get(),MainImGUIManager->ImGuiCommandList->Get() ,FrameEndCommandList->Get() };
-			M_MainCommandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
-		}
-		else
-		{
-			ID3D12CommandList* ppCommandLists[] = { FrameBeginCommandList->Get(), MainImGUIManager->ImGuiCommandList->Get(),FrameEndCommandList->Get() };
-			M_MainCommandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
-		}
+#endif
 
+		Render_CommandLists.push_back(FrameBeginCommandList->Get());
+		if (MainChunkRenderer){ Render_CommandLists.push_back(MainChunkRenderer->ChunkOpaqueRenderCommandList->Get()); }
+#ifdef _DEBUG
+		Render_CommandLists.push_back(MainImGUIManager->ImGuiCommandList->Get());
+#endif
+		Render_CommandLists.push_back(FrameEndCommandList->Get());
+
+		M_MainCommandQueue->ExecuteCommandLists(Render_CommandLists.size(), Render_CommandLists.data());
 
 		DXGISwapChain->Present(1, 0);
 

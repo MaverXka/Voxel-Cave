@@ -13,7 +13,7 @@ constexpr float V0 = 0.0f * TILE;
 constexpr float U1 = U0 + TILE;
 constexpr float V1 = V0 + TILE;
 
-Chunk::Chunk(Vector2Int ChunkPos) : ChunkPosition(ChunkPos)
+Chunk::Chunk(Vector2Int ChunkPos) : ChunkPosition(ChunkPos*CHUNK_WIDTH)
 {
 	ChunkVertexBuffer = VertexBuffer(VertexFormat::PositionUVColor);
 
